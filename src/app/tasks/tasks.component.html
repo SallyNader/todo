@@ -1,0 +1,28 @@
+<div class="container">
+<div class="input-group col-lg-6">
+  <form (submit)="addTask()" >
+ 
+  <input type="text" class="form-control" ([ngModel])="taskName" name="taskName" placeholder="Enter The Task....." aria-describedby="basic-addon1">
+  <input type="text" class="form-control" ([ngModel])="date" name="date" placeholder="Enter The date....." aria-describedby="basic-addon1">
+ <span class="input-group-btn">    
+        <button class="btn btn-secondary"  type="button">Add</button>   
+      </span>
+</form>
+</div>
+
+  <div class="col-lg-4">
+
+    <div class="input-group" *ngFor = "let task of tasks">
+      <span class="input-group-addon">
+        <input type="checkbox" aria-label="Checkbox for following text input">
+      </span>
+      <input type="text" class="form-control" aria-label="Text input with checkbox" value="{{task.taskName}}">
+      <span class="input-group-btn">
+        <button class="btn btn-secondary"  type="button">X</button>
+      </span>
+    </div>
+
+</div>
+  
+</div>  
+<br>
