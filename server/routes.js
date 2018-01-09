@@ -33,6 +33,11 @@ router.route("/:id")
                 res.json(result);
         });
     })
+    .get((req, res, next) => {
+        Task.findById(req.params.id, (err, task) => {
+            res.json(task);
+        });
+    })
     .put((req, res) => {
         Task.findOne({_id: req.params.id}, (err, task) => {
             if(err)

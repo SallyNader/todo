@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GetTaskService } from '../service/get-task.service';
 import { Task } from '../Task';
+import { Http, Headers } from '@angular/http';
 
 @Component({
   selector: 'app-tasks',
@@ -14,8 +15,9 @@ export class TasksComponent implements OnInit {
   taskName: string;
   date: Date;
   priority: Number;
+  taskID: string;
 
-  constructor(private _taskService: GetTaskService) { }
+  constructor(private _taskService: GetTaskService, private _http: Http) { }
   
 
   ngOnInit() 
@@ -27,7 +29,7 @@ export class TasksComponent implements OnInit {
   addTask()
   {
     const newTask = {
-      taskName: this.task,
+      taskName: this.taskName,
       date: this.date,
       priority: this.priority
     }
@@ -36,6 +38,29 @@ export class TasksComponent implements OnInit {
         this.tasks.push(task);        
       });
 
+  }
+  deleteTask(id)
+  {
+    var tasks = this.tasks;
+    this._taskService.deleteTask(id)
+      .subscribe(data => {
+        for(var i=0; i< tasks.length;i++){
+          if(tasks[i]._id == id)
+          {
+            tasks.splice(i,1);
+          }
+        }
+      });
+  }
+  updateTask()
+  {
+    var data = {
+      id: this.taskID,
+      taskName: this.taskName,
+      priority: this.priority 
+    }
+    this._http.put('http://localhost:8888/task/'+data.id, data)
+      .subscribe(res => res.json());
   }     
 
 }

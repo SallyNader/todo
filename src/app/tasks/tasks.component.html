@@ -2,11 +2,9 @@
 <div class="input-group col-lg-6">
   <form (submit)="addTask()" >
  
-  <input type="text" class="form-control" ([ngModel])="taskName" name="taskName" placeholder="Enter The Task....." aria-describedby="basic-addon1">
-  <input type="text" class="form-control" ([ngModel])="date" name="date" placeholder="Enter The date....." aria-describedby="basic-addon1">
- <span class="input-group-btn">    
-        <button class="btn btn-secondary"  type="button">Add</button>   
-      </span>
+  <input type="text" class="form-control" [(ngModel)]="taskName" name="taskName" placeholder="Enter The Task....." >
+  <input type="text" class="form-control" [(ngModel)]="date" name="date" placeholder="Enter The date....." >
+        <button class="btn btn-secondary"  type="submit">Add</button>   
 </form>
 </div>
 
@@ -18,11 +16,18 @@
       </span>
       <input type="text" class="form-control" aria-label="Text input with checkbox" value="{{task.taskName}}">
       <span class="input-group-btn">
-        <button class="btn btn-secondary"  type="button">X</button>
+        <button class="btn btn-secondary" (click)="deleteTask(task._id)"  type="button">X</button>
+      </span>
+      <span class="input-group-btn">
+        <a routerLink="/separet/{{task._id}}" class="btn btn-secondary"   type="button">view</a>
+      </span>
+      <span class="input-group-btn">
       </span>
     </div>
 
 </div>
-  
+
+
+
 </div>  
 <br>
