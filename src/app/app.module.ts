@@ -15,9 +15,13 @@ import { SignupComponent } from './signup/signup.component';
 const routes  = [
   {path: 'separet/:id' , component: SeparteTaskComponent},
   {path: 'home' , component: TasksComponent},
-  {path: 'login', component:LoginComponent},
-  {path: 'signup', component: SignupComponent}
-  
+  {
+    path: 'auth',
+    children : [
+      {path: 'login', component:LoginComponent},
+      {path: 'signup', component: SignupComponent}
+    ]
+  }  
 ];
 
 @NgModule({
