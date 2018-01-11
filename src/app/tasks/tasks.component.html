@@ -19,7 +19,7 @@
         <button class="btn btn-secondary" (click)="deleteTask(task._id)"  type="button">X</button>
       </span>
       <span class="input-group-btn">
-        <a routerLink="/separet/{{task._id}}" class="btn btn-secondary"   type="button">view</a>
+        <a [routerLink]="['/separet', task._id]" class="btn btn-secondary"   type="button">view</a>
       </span>
       <span class="input-group-btn">
       </span>

@@ -7,12 +7,14 @@ const mongoDB_connection = require('./connection/mongoDB');
 
 var app = express();
 
-var taskRoutes = require('./server/routes');
+var taskRoutes = require('./server/routes'),
+    authRoutes = require('./server/authRoutes');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname,'dist')));
 app.use('/task',taskRoutes);
+app.use('/Auth',authRoutes);
 app.get("*"), (req , res) => {
     res.sendFile(path.join(__dirname,'dist/index.html'));
 }
