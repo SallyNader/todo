@@ -11,7 +11,7 @@ export class SignService {
   {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this._http.post('http://localhost:8888/Auth', newUser, {headers: headers})
+    return this._http.post('http://localhost:8888/signup', newUser, {headers: headers})
       .map(res => res.json());
   }
 

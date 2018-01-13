@@ -1,15 +1,19 @@
 var express = require('express'),
-    authRouter = express.Router(),
-    mongoose = require('mongoose');
+    router = express.Router(); 
 
-    
+router.route('/')
+    .post((req, res, next) => {       
+       req.login(req.body, function() {
+           res.redirect('/signup/profile');
+       });
+        res.json(req.body);
+    })
+    .get((req, res, next) => {
+        res.json({"k":"hfd"});
+    });
+router.route('/profile')
+    .get((req, res, next) => {
+        res.json(req.user);
+    });     
 
-var router = function(){
-    authRouter.route('signUp')
-        .post((req, res) => {
-            console.log(req.body);
-        });
-    return authRouter;    
-}
-
-module.exports = router;
+module.exports =router;  

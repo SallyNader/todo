@@ -7,6 +7,8 @@ import { SignService } from '../service/sign/sign.service';
   providers: [SignService]
 })
 export class SignupComponent implements OnInit {
+  userName: string;
+  password: string;
 
   constructor(private _signupservice: SignService) { }
 
@@ -15,9 +17,11 @@ export class SignupComponent implements OnInit {
   addUser()
   {
     let user = {
-
+      userName: this.userName,
+      password: this.password
     }
-    this._signupservice.addUser(user);
+    this._signupservice.addUser(user).
+      subscribe( user => console.log(user));
   }
 
 }
