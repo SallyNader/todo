@@ -11,7 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SeparteTaskComponent } from './separte-task/separte-task.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component'; 
-
+import { SharedServiceService } from './service/shared-service/shared-service.service';
 const routes  = [
   {path: 'separet/:id' , component: SeparteTaskComponent},
   {path: 'home' , component: TasksComponent},
@@ -42,7 +42,8 @@ const routes  = [
   ],
   providers: [
     GetTaskService,
-    SignService
+    SignService,
+    SharedServiceService
   ],
   bootstrap: [AppComponent]
 })
