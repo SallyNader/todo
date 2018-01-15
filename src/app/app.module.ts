@@ -5,13 +5,11 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { GetTaskService } from './service/get-task.service';
-import { SignService } from './service/sign/sign.service';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SeparteTaskComponent } from './separte-task/separte-task.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component'; 
-import { SharedServiceService } from './service/shared-service/shared-service.service';
 const routes  = [
   {path: 'separet/:id' , component: SeparteTaskComponent},
   {path: 'home' , component: TasksComponent},
@@ -42,8 +40,6 @@ const routes  = [
   ],
   providers: [
     GetTaskService,
-    SignService,
-    SharedServiceService
   ],
   bootstrap: [AppComponent]
 })
