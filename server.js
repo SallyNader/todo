@@ -18,10 +18,13 @@ var taskRoutes = require('./server/routes'),
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport')(passport);
+
 app.use(cookieParser());
 app.use(session({secret: 'todo'}));
-
-require('./config/passport')(app);
 
 app.use(express.static(path.join(__dirname,'dist')));
 app.use(express.static(path.join(__dirname, "public")));
