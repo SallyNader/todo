@@ -14,6 +14,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component'; 
+import { ValidateService } from './service/validate/validate.service';
 const routes  = [
   {path: 'separet/:id' , component: SeparteTaskComponent},
   {path: 'home' , component: TasksComponent},
