@@ -9,10 +9,17 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SeparteTaskComponent } from './separte-task/separte-task.component';
 import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component'; 
+import { SignupComponent } from './signup/signup.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component'; 
 const routes  = [
   {path: 'separet/:id' , component: SeparteTaskComponent},
   {path: 'home' , component: TasksComponent},
+  {path: 'home2', component: HomeComponent},
+  {path: 'dashboard', component: DashboardComponent},
+  {path: 'profile', component: ProfileComponent},
   {
     path: 'auth',
     children : [
@@ -28,7 +35,11 @@ const routes  = [
     TasksComponent,
     SeparteTaskComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    NavbarComponent,
+    DashboardComponent,
+    HomeComponent,
+    ProfileComponent
   ],
   imports: [
     RouterModule.forRoot(routes),    
