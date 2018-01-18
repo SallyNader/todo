@@ -15,6 +15,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component'; 
 import { ValidateService } from './service/validate/validate.service';
+import { AuthService } from './service/auth/auth.service';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+
+
 const routes  = [
   {path: 'separet/:id' , component: SeparteTaskComponent},
   {path: 'home' , component: TasksComponent},
@@ -47,11 +51,16 @@ const routes  = [
     BrowserModule,
     HttpModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FlashMessagesModule
+    
     
   ],
   providers: [
     GetTaskService,
+    ValidateService,
+    AuthService
+
   ],
   bootstrap: [AppComponent]
 })
