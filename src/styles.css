@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-image: url(./assets/img/b1.jpg)
+}
+.page-header {
+    text-align: center;
+    padding-top: 5%;
+}
+label {
+    font-weight: bold;
+}

@@ -17,14 +17,14 @@ import { ProfileComponent } from './profile/profile.component';
 import { ValidateService } from './service/validate/validate.service';
 import { AuthService } from './service/auth/auth.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
-
+import { AuthGuard } from './guards/auth.guard';
 
 const routes  = [
   {path: 'separet/:id' , component: SeparteTaskComponent},
   {path: 'home' , component: TasksComponent},
   {path: 'home2', component: HomeComponent},
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'profile', component: ProfileComponent},
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {
     path: 'auth',
     children : [
@@ -59,7 +59,8 @@ const routes  = [
   providers: [
     GetTaskService,
     ValidateService,
-    AuthService
+    AuthService,
+    AuthGuard
 
   ],
   bootstrap: [AppComponent]

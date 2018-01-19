@@ -1,5 +1,6 @@
 const mongoose = require('mongoose'),
-      bcrypt = require('bcryptjs');
+      bcrypt = require('bcryptjs'),
+      Schema  =mongoose.Schema;
 
 const UserSchema = mongoose.Schema({
     name: {
@@ -16,7 +17,8 @@ const UserSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    tasks: [{type: Schema.Types.ObjectId, ref: "Task"}]
 });
 
 const User = mongoose.model('User', UserSchema);

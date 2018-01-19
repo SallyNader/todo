@@ -1,5 +1,10 @@
 const mongoose = require('mongoose'),
-      TaskSchema = mongoose.Schema({
+      Schema  =mongoose.Schema;
+
+const TaskSchema = mongoose.Schema({
+        author: {
+            type: Schema.Types.ObjectId, ref: "User"
+        },  
         taskName: { 
            type: String,
            required: true
@@ -13,5 +18,6 @@ const mongoose = require('mongoose'),
             default:5
         }
       });
-const Task = mongoose.model('tasks',TaskSchema);
+
+const Task = mongoose.model('Task',TaskSchema);
 module.exports = Task;

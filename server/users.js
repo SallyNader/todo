@@ -1,10 +1,11 @@
 const express = require('express'),
+      cors = require('cors'),
       router = express.Router(),
       passport = require('passport'),
       jwt = require('jsonwebtoken'),
       User = require('../models/user');
 
-router.post('/register', (req, res, next) => {
+router.post('/register',cors(), (req, res, next) => {
     let user = {
         name: req.body.name,
         email: req.body.email,

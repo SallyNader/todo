@@ -6,8 +6,13 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a [routerLinkActive] = "['active']"  [routerLinkActiveOptions] = "{exact:true}" class="nav-item nav-link active" [routerLink]= "['/home2']">Home <span class="sr-only">(current)</span></a>
-      <a [routerLinkActive] = "['active']"  [routerLinkActiveOptions] = "{exact:true}"  class="nav-item nav-link"  [routerLink] = "['/auth/login']" >Login</a>
-      <a [routerLinkActive] = "['active']"  [routerLinkActiveOptions] = "{exact:true}" class="nav-item nav-link" [routerLink] = "['/auth/signup']">Sign Up</a>
-    </div>
+      <a *ngIf ="!_authService.loggedIn()"  [routerLinkActive] = "['active']"  [routerLinkActiveOptions] = "{exact:true}"  class="nav-item nav-link"  [routerLink] = "['/auth/login']" >Login</a>
+      <a *ngIf = "!_authService.loggedIn()" [routerLinkActive] = "['active']"  [routerLinkActiveOptions] = "{exact:true}" class="nav-item nav-link" [routerLink] = "['/auth/signup']">Sign Up</a>
+      <a *ngIf = "_authService.loggedIn()" [routerLinkActive] = "['active']"  [routerLinkActiveOptions] = "{exact:true}"  class="nav-item nav-link"  [routerLink] = "['/dashboard']" >Dashboard</a>
+      <a *ngIf = "_authService.loggedIn()" [routerLinkActive] = "['active']"  [routerLinkActiveOptions] = "{exact:true}"  class="nav-item nav-link"  [routerLink] = "['/profile']" >Profile</a>
+
+      
+      <a *ngIf = "_authService.loggedIn()" class="nav-item nav-link" (click) = "onLogoutClick()" href = "#">Logout</a>
+      </div>
   </div>
 </nav>

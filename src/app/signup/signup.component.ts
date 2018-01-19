@@ -3,7 +3,6 @@ import { ValidateService } from '../service/validate/validate.service';
 import { AuthService } from '../service/auth/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
-import { Router } from '@angular/router/src/config';
 
 @Component({
   selector: 'app-signup',
@@ -45,6 +44,16 @@ export class SignupComponent implements OnInit {
       this._flashMessages.show("Please use a valid email", {cssClass: 'alert-danger', timeout: 3000});
       return false;
     }
+    this._authService.registerUser(user).subscribe(data => {
+      if(data.success) {
+        this._flashMessages.show("you are now registered you can login", {cssClass: 'alert-success', timeout:3000 });
+        this._router.navigate(['/auth/login']);
+      } else {
+        this._flashMessages.show("Something Went Wrong", {cssClass: "alert-danger", timeout:3000});
+        this._router.navigate(['/auth/register']);
+
+      }
+    });
   }
 
 }
