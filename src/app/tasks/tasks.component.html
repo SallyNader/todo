@@ -2,23 +2,30 @@
 <div class="input-group col-lg-6">
   <form (submit)="addTask()" >
   <input type="hidden" [(ngModel)] = "userID" name="userID" >
-  <input type="text"  [(ngModel)]="taskName" name="taskName" placeholder="Enter The Task....." >
-  <input type="text" [(ngModel)]="date" name="date" placeholder="Enter The date....." >
-  <input type="text" [(ngModel)]="priority" name="priority" placeholder="Enter The priority....." >
-        <button class="btn btn-secondary"  type="submit">Add</button>   
+  <br/>
+  <input type="text" class="input-text"  [(ngModel)]="taskName" name="taskName" placeholder="Enter The Task....." >
+    <br/>
+
+  <input type="text" class="input-text" [(ngModel)]="date" name="date" placeholder="Enter The date....." >
+    <br/>
+
+  <input type="text" class="input-text" [(ngModel)]="priority" name="priority" placeholder="Enter The priority....." >
+    <br/>
+
+        <button class="btn btn-secondary input-submit"  type="submit">Add</button>   
 </form>
 </div>
 
   <div class="col-lg-4">
 
     <div class="input-group" *ngFor = "let task of tasks">
-      <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+      <span class="input-group-addon" (click)="deleteTask(task._id)">
+        X
       </span>
       <input type="text" class="form-control" aria-label="Text input with checkbox" value="{{task.taskName}}">
-      <span class="input-group-btn">
-        <button class="btn btn-secondary" (click)="deleteTask(task._id)"  type="button">X</button>
-      </span>
+      <!-- <span class="input-group-btn">
+        <button class="btn btn-secondary"   type="button">X</button>
+      </span> -->
       <span class="input-group-btn">
         <a [routerLink]="['/separet', task._id]" class="btn btn-secondary"   type="button">view</a>
       </span>

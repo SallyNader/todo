@@ -1,0 +1,12 @@
+.navbar a {
+  font-size: 13px;
+  text-transform: none;  
+}
+.navbar-nav {
+    padding-left: 7%;
+}
+.navbar-brand {
+    margin-left: 7%;
+    font-weight: bold;
+    font-size: 20px;
+}
