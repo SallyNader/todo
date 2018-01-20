@@ -11,19 +11,53 @@ import { ActivatedRoute } from '@angular/router';
   providers:[GetTaskService]
 })
 export class SeparteTaskComponent implements OnInit {
-  task: Task;
+  task: "";
+  taskName: String;
+  date: Date;
+  priority: Number;
   id= '';
+  showForm: boolean = false;
 
-  constructor(private _taskService: GetTaskService, private _http: Http, private route: ActivatedRoute) { }
+  constructor(
+    private _taskService: GetTaskService,
+    private _http: Http,
+    private route: ActivatedRoute
+  ) { 
+      this.id = this.route.snapshot.params.id;
+      //assign initials values to variables
+      // this.taskName = this.task.taskName;
+      // this.date = this.task.date;
+      // this.priority = this.task.priority;
+  }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params.id;    
+          
     this.getOneTask(this.id);
+  }
+  //to hide and show update form when click on update button
+  toggleShow()
+  {
+    this.showForm =!(this.showForm);
   }
   getOneTask(id)
   {
     this._taskService.getOneTask(id)
-    .subscribe(task => this.task = task);
+      .subscribe(data => {
+        this.task = data;
+        console.log(this.task);
+      });
   }
+  // updateTask(id)
+  // {
+  //   let updatedTask = {
+  //     taskName: this.taskName,
+  //     date: this.date,
+  //     priority: this.priority
+  //   };
+  //   this._taskService.updateTask(this.id, updatedTask)
+  //     .subscribe(task => {
+  //       this.task = task
+  //     });
+  // }
 
 }

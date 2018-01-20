@@ -1,9 +1,10 @@
 <div class="container">
 <div class="input-group col-lg-6">
   <form (submit)="addTask()" >
- 
-  <input type="text" class="form-control" [(ngModel)]="taskName" name="taskName" placeholder="Enter The Task....." >
-  <input type="text" class="form-control" [(ngModel)]="date" name="date" placeholder="Enter The date....." >
+  <input type="hidden" [(ngModel)] = "userID" name="userID" >
+  <input type="text"  [(ngModel)]="taskName" name="taskName" placeholder="Enter The Task....." >
+  <input type="text" [(ngModel)]="date" name="date" placeholder="Enter The date....." >
+  <input type="text" [(ngModel)]="priority" name="priority" placeholder="Enter The priority....." >
         <button class="btn btn-secondary"  type="submit">Add</button>   
 </form>
 </div>

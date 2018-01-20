@@ -16,19 +16,34 @@ export class TasksComponent implements OnInit {
   date: Date;
   priority: Number;
   taskID: string;
+  userID: string;
 
   constructor(private _taskService: GetTaskService, private _http: Http) { }
   
-
+  
   ngOnInit() 
-  {
-    this._taskService.getTask()
-      .subscribe(tasks => 
-        this.tasks = tasks);
+  { 
+    this.userID = this.getIdOfLoggedUser();
+    this._taskService.getTaskBelogsToUser(this.userID)
+      .subscribe(user => 
+        {
+          this.tasks= user.tasks;
+          console.log(user.tasks);
+        });
   }
+
+  getIdOfLoggedUser()
+  {
+    const userId = localStorage.getItem('user');
+    return JSON.parse(userId).id;
+  }    
   addTask()
   {
+    const userId = localStorage.getItem('user');
+    this.userID = JSON.parse(userId).id;
+    console.log(this.userID);
     const newTask = {
+      author: this.userID,
       taskName: this.taskName,
       date: this.date,
       priority: this.priority
@@ -37,7 +52,9 @@ export class TasksComponent implements OnInit {
       .subscribe( task => {
         this.tasks.push(task);        
       });
-
+    this.taskName = "";
+    this.priority = null;
+    this.date = null;  
   }
   deleteTask(id)
   {
@@ -61,6 +78,5 @@ export class TasksComponent implements OnInit {
     }
     this._http.put('http://localhost:8888/task/'+data.id, data)
       .subscribe(res => res.json());
-  }     
-
+  }
 }

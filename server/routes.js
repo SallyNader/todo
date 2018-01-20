@@ -1,15 +1,12 @@
 var express = require('express'),
     router = express.Router(),
-    Task = require('../models/Task');
+    Task = require('../models/Task'),
+    User = require("../models/user");
 
 router.route('/')
-    .get((req,res,next) => {
-        Task.find((err, tasks) => {
-            res.json(tasks);
-        });
-    })
     .post((req, res, next) => {
         let items = {
+            author: req.body.author,
             taskName: req.body.taskName,
             date: req.body.date,
             priority: req.body.priority
@@ -19,7 +16,17 @@ router.route('/')
             if(err)
                 console.log(err);
             else
-                res.json(task);
+                {
+                    res.json(task);
+                    User.findByIdAndUpdate(items.author,
+                    {"$push": {"tasks": newTask._id}},
+                    {"new": true, "upsert": true},
+                    (err, user) => {
+                        if(err) throw err;
+                        console.log(user);                        
+                    });
+
+                }
         });
 
     });  

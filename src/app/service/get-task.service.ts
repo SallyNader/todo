@@ -7,9 +7,9 @@ export class GetTaskService {
 
   constructor(private _http: Http) { }
   
-  getTask()
+  getTaskBelogsToUser(userID)
   {
-    return this._http.get('http://localhost:8888/task')
+    return this._http.get('http://localhost:8888/user/tasks/'+userID)
       .map(res => res.json());
   }
   getOneTask(taskID)

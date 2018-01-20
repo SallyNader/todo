@@ -61,5 +61,18 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res
     res.json({user: req.user});
 });
 
+router.route('/tasks/:userId')
+    //get all tasks that belogs to one user
+    .get((req,res,next) => {
+        var userID =  req.params.userId;
+        User.
+          findOne({_id: userID}).
+          populate('tasks').
+          exec((err, user) => {
+              if(err) throw err;
+              res.json(user);
+          });
+    });  
+
 
 module.exports = router;
