@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component'; 
 import { ValidateService } from './service/validate/validate.service';
 import { AuthService } from './service/auth/auth.service';
+import { FavoriteService } from './service/favorite/favorite.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
 
@@ -60,7 +61,8 @@ const routes  = [
     GetTaskService,
     ValidateService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    FavoriteService
 
   ],
   bootstrap: [AppComponent]

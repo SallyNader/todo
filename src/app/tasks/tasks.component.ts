@@ -79,4 +79,8 @@ export class TasksComponent implements OnInit {
     this._http.put('http://localhost:8888/task/'+data.id, data)
       .subscribe(res => res.json());
   }
+  addToFavorite(id)
+  {
+    console.log(id);
+  }
 }

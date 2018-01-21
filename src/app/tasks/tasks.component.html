@@ -19,6 +19,9 @@
   <div class="col-lg-4">
 
     <div class="input-group" *ngFor = "let task of tasks">
+    <span class="input-group-addon" (click) = "addToFavorite(task._id)" >
+       <span class="glyphicon glyphicon-star-empty"></span>
+      </span>
       <span class="input-group-addon" (click)="deleteTask(task._id)">
         X
       </span>
