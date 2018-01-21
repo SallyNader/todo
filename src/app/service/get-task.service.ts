@@ -22,7 +22,7 @@ export class GetTaskService {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this._http.post('http://localhost:8888/task',newTask, {headers: headers})
-      .map( res => res.json());
+      .map(res => res.json());
   }
 
   deleteTask(id)
@@ -37,6 +37,5 @@ export class GetTaskService {
     headers.append('Content-Type', 'application/json');
     return this._http.put('http://localhost:8888/task/'+id, updatedTask, {headers:headers})
       .map(res => res.json());
-
   }
 }

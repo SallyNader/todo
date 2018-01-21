@@ -14,7 +14,8 @@ var app = express();
 
 var taskRoutes = require('./server/routes'),
     authRoutes = require('./server/authRoutes'),
-    user = require('./server/users');
+    user = require('./server/users'),
+    favorite = require('./server/favoriteRoutes');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
@@ -28,9 +29,10 @@ app.use(session({secret: 'todo'}));
 app.use(express.static(path.join(__dirname,'dist')));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
-app.use('/task',taskRoutes);
-app.use('/signup',authRoutes);
-app.use("/user",user);
+app.use('/task', taskRoutes);
+app.use('/signup', authRoutes);
+app.use('/user', user);
+app.use('/favorite', favorite);
 
 
 app.get("*"), (req , res) => {
