@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { GetTaskService } from '../service/get-task.service';
 import { Task } from '../Task';
 import { Http, Headers } from '@angular/http';
-
+import { FavoriteService } from '../service/favorite/favorite.service';
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css'],
-  providers:[GetTaskService]
+  providers:[GetTaskService, FavoriteService]
 })
 export class TasksComponent implements OnInit {
   tasks : Task[];
@@ -17,8 +17,17 @@ export class TasksComponent implements OnInit {
   priority: Number;
   taskID: string;
   userID: string;
+  isFavorite: boolean;
+  favoritesArray: String[];
 
-  constructor(private _taskService: GetTaskService, private _http: Http) { }
+  constructor(
+    private _taskService: GetTaskService,
+    private _http: Http,
+    private _favoriteService: FavoriteService
+  ) { 
+    this.isFavorite = false;
+    this.favoritesArray = [];
+  }
   
   
   ngOnInit() 
@@ -30,6 +39,7 @@ export class TasksComponent implements OnInit {
           this.tasks= user.tasks;
           console.log(user.tasks);
         });
+    this.getAllFavoritesOfUser();    
   }
 
   getIdOfLoggedUser()
@@ -79,8 +89,28 @@ export class TasksComponent implements OnInit {
     this._http.put('http://localhost:8888/task/'+data.id, data)
       .subscribe(res => res.json());
   }
-  addToFavorite(id)
+  addToFavorite(taskID)
   {
-    console.log(id);
+    var userID = this.getIdOfLoggedUser();
+    this.taskID = taskID;
+    let newFevorite = {
+      author: userID,
+      taskId: this.taskID
+    }
+    this._favoriteService.addToFavorite(newFevorite)
+      .subscribe(favorite => {
+        console.log(favorite);
+      });
+  }
+
+  getAllFavoritesOfUser()
+  {
+    this._favoriteService.getAllFavorites()
+      .subscribe(favorites => {
+        for(let i of favorites) {
+          this.favoritesArray.push(i.taskId);
+        }
+         console.log(this.favoritesArray);         
+      });
   }
 }

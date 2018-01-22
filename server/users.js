@@ -38,6 +38,10 @@ router.post('/authenticate', (req, res, next) => {
           const token = jwt.sign({data: user}, "yoursecret", {
             expiresIn: 604800 // 1 week
           });
+          
+          //set local variable for user id
+          // req.locals.userId = user._id;
+          console.log("from authenticate:  " + user._id);
   
           res.json({
             success: true,

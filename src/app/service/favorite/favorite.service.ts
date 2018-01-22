@@ -7,9 +7,19 @@ import 'rxjs/add/operator/map';
 export class FavoriteService {
 
   constructor(private _http: Http) { }
-  addToFavorite()
-  {
 
+  addToFavorite(newFevorite)
+  {
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this._http.post('http://localhost:8888/favorite', newFevorite, {headers: headers})
+      .map(res => res.json());
+  }
+
+  getAllFavorites()
+  {
+    return this._http.get('http://localhost:8888/favorite')
+      .map(res => res.json());
   }
 
   removeFromFavorite()

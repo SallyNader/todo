@@ -4,7 +4,12 @@ const express = require('express'),
 
 router.route('/')
     .get((req, res, next) => {
-        res.json({msg: "done"});
+        Favorite.find({}, (err, favorites) => {
+            if(err)
+                console.log(err);
+            else
+                console.log(favorites);    
+        });
     })
     .post((req, res, next) => {
         let favoriteData = {
@@ -17,9 +22,7 @@ router.route('/')
                 console.log(err);
             else
                 res.json(favorite);
-
         });
     });
-
 
 module.exports = router;
