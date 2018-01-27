@@ -4,7 +4,6 @@ var express = require('express'),
     path = require('path'),   
     http = require('http'),
     passport = require('passport'),
-    session = require('express-session'),
     cookieParser = require('cookie-parser'),   
     mongoose = require('mongoose');
 
@@ -25,7 +24,6 @@ app.use(passport.session());
 require('./config/passport')(passport);
 
 app.use(cookieParser());
-app.use(session({secret: 'todo'}));
 
 app.use(express.static(path.join(__dirname,'dist')));
 app.use(express.static(path.join(__dirname, "public")));

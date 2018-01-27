@@ -3,12 +3,14 @@ import { GetTaskService } from '../service/get-task.service';
 import { Task } from '../Task';
 import { Http, Headers } from '@angular/http';
 import { FavoriteService } from '../service/favorite/favorite.service';
+
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css'],
   providers:[GetTaskService, FavoriteService]
 })
+
 export class TasksComponent implements OnInit {
   tasks : Task[];
   task: Task;
@@ -16,17 +18,17 @@ export class TasksComponent implements OnInit {
   date: Date;
   priority: Number;
   taskID: string;
-  userID: string;
-  isFavorite: boolean;
+  userID: string;  
   favoritesArray: String[];
+  buttonClass: string;
 
   constructor(
     private _taskService: GetTaskService,
     private _http: Http,
     private _favoriteService: FavoriteService
   ) { 
-    this.isFavorite = false;
     this.favoritesArray = [];
+    this.buttonClass = "glyphicon glyphicon-star-empty";
   }
   
   
@@ -110,7 +112,22 @@ export class TasksComponent implements OnInit {
         for(let i of favorites) {
           this.favoritesArray.push(i.taskId);
         }
-         console.log(this.favoritesArray);         
+        
+        for(let task of this.tasks){
+          for(let i of this.favoritesArray) {
+            if(task._id === i) {
+              task.isFavoriteC = true;
+              this.buttonClass = "glyphicon glyphicon-star";
+            }        
+          }
+        }                  
+      });
+  }
+  removeFromFavorite(taskId)
+  {
+    this._favoriteService.removeFromFavorite(taskId)
+      .subscribe(data => {
+        console.log("removed fav: "+data._id);
       });
   }
 }

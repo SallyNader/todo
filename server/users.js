@@ -22,6 +22,7 @@ router.post('/register',cors(), (req, res, next) => {
     });
 });     
 
+
 router.post('/authenticate', (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -31,18 +32,15 @@ router.post('/authenticate', (req, res, next) => {
       if(!user){
         return res.json({success: false, msg: 'User not found'});
       }
-  
+      const userData = user;
+      module.exports.userData = userData;
       User.comparePassword(password, user.password, (err, isMatch) => {
         if(err) throw err;
         if(isMatch){
           const token = jwt.sign({data: user}, "yoursecret", {
             expiresIn: 604800 // 1 week
           });
-          
-          //set local variable for user id
-          // req.locals.userId = user._id;
-          console.log("from authenticate:  " + user._id);
-  
+        
           res.json({
             success: true,
             token: `Bearer ${token}`,

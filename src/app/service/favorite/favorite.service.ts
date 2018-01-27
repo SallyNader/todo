@@ -22,9 +22,9 @@ export class FavoriteService {
       .map(res => res.json());
   }
 
-  removeFromFavorite()
+  removeFromFavorite(taskId)
   {
-    
+    return this._http.delete('http://localhost:8888/favorite/'+taskId)
+      .map(res => res.json());
   }
-
 }

@@ -1,6 +1,11 @@
 export class Task {
-    _id?:Number;
+    _id?: String;
     taskName: String;
     date: Date;
-    priority: Number
+    priority: Number;
+    isFavoriteC: Boolean
+    constructor()
+    {
+        this.isFavoriteC = false;
+    }
 }

@@ -19,17 +19,27 @@
   <div class="col-lg-4">
 
     <div class="input-group" *ngFor = "let task of tasks">
-    <span class="input-group-addon" (click) = "addToFavorite(task._id)" >
-       <span class="glyphicon glyphicon-star-empty"></span>
-      </span>
+
+  
+  
+        <span class="input-group-addon"  >
+         
+        
+       <span [ngClass] = "buttonClass" (click) = "removeFromFavorite(task._id)"   *ngIf = "task.isFavoriteC; else elseBlock"></span>
+      <span [ngClass] = "buttonClass" (click) = "addToFavorite(task._id)"  *ngIf = "!task.isFavoriteC"></span>
+
+      </span> 
+         
+ 
+      
       <span class="input-group-addon" (click)="deleteTask(task._id)">
         X
       </span>
       <input type="text" class="form-control" aria-label="Text input with checkbox" value="{{task.taskName}}">
-      <!-- <span class="input-group-btn">
-        <button class="btn btn-secondary"   type="button">X</button>
-      </span> -->
-      <span class="input-group-btn">
+      
+       
+      
+      <span class="input-group-btn" >
         <a [routerLink]="['/separet', task._id]" class="btn btn-secondary"   type="button">view</a>
       </span>
       <span class="input-group-btn">

@@ -1,14 +1,15 @@
 const express = require('express'),
       router = express.Router(),
-      Favorite = require('../models/Favorite');
+      Favorite = require('../models/Favorite'),
+      GetUserData = require('../server/users');
 
 router.route('/')
     .get((req, res, next) => {
-        Favorite.find({}, (err, favorites) => {
+        Favorite.find({'author': GetUserData.userData._id }, (err, favorites) => {
             if(err)
                 console.log(err);
             else
-                console.log(favorites);    
+                res.json(favorites);    
         });
     })
     .post((req, res, next) => {
@@ -24,5 +25,15 @@ router.route('/')
                 res.json(favorite);
         });
     });
+
+    router.route('/:id')
+        .delete((req, res, next) => {
+            Favorite.remove({taskId: req.params.id}, (err, result) => {
+                if(err)
+                    console.log(err);
+                else
+                    res.json({msg: "done"});
+            });
+        });
 
 module.exports = router;
